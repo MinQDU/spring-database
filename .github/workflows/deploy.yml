@@ -38,7 +38,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-directory: 'data/json'
+          source-directory: 'apps/spring-database/data/json'
           destination-github-username: 'MinQDU'
           destination-repository-name: 'spring-database'
           target-branch: main
