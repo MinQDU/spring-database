@@ -3,7 +3,7 @@ name: CI CD Test Server
 on:
   push:
     branches:
-      - main  # main 브랜치에 푸시될 때 트리거
+      - main
 
 jobs:
   build_and_push:
@@ -18,21 +18,22 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'temurin'  # OpenJDK 배포판
+          distribution: 'temurin'
 
       - name: Grant execute permission for Gradlew
-        run: chmod +x ./gradlew  # 실행 권한 부여
+        run: chmod +x ./gradlew
 
       - name: Build and Push Image with Jib
         run: |
           ./gradlew jib \
             -Djib.to.image=docker-repo.minq.work/my-app:latest \
             -Djib.to.auth.username=${{ secrets.REGISTRY_USER }} \
-            -Djib.to.auth.password=${{ secrets.REGISTRY_PASSWORD }} \
-            --stacktrace --info --no-daemon
+            -Djib.to.auth.password=${{ secrets.REGISTRY_PASSWORD }}
 
       - name: Push JSON to another repository
         uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source-directory: 'data/json'
           destination-github-username: 'MinQDU'
