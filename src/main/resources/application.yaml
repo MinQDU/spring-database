@@ -1,13 +1,16 @@
 spring:
   datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.1.35:3306/user?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: user
-    password: uesr
+    password: user
   jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-  data:
-    redis:
-      host: redis
-      port: 6379
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        storage_engine: innodb
+        format_sql: true
+        use_sql_comments: true
+    open-in-view: false
+    show_sql: true
