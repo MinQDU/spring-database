@@ -20,6 +20,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'  # OpenJDK 배포판
 
+      - name: Grant execute permission for Gradlew
+        run: chmod +x ./gradlew  # 실행 권한 부여
+
       - name: Build and Push Image with Jib
         run: ./gradlew jib \
           --image=docker-repo.minq.work/my-app:latest \
