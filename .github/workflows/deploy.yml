@@ -18,6 +18,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
+          distribution: 'temurin'  # OpenJDK 배포판
 
       - name: Build and Push Image with Jib
         run: ./gradlew jib \
@@ -29,8 +30,8 @@ jobs:
         uses: cpina/github-action-push-to-another-repository@main
         with:
           source-directory: 'data/json'
-          destination-github-username: 'Team-Snowball'
-          destination-repository-name: 'tsb-turbo-front'
+          destination-github-username: 'MinQDU'
+          destination-repository-name: 'spring-database'
           target-branch: main
           target-directory: 'apps/spring-database/server/error'
           user-email: '2024513@daelim.ac.kr'
