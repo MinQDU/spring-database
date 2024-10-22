@@ -29,3 +29,7 @@ jobs:
             -Djib.to.image=docker-repo.minq.work/my-app:latest \
             -Djib.to.auth.username=${{ secrets.REGISTRY_USER }} \
             -Djib.to.auth.password=${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Deploy to Swarm
+        run: |
+          ssh user@swarm-manager 'docker stack deploy -c /path/to/docker-compose.yml my-app'
