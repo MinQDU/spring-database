@@ -8,8 +8,6 @@ plugins {
 	kotlin("plugin.spring") version "1.9.23"
 	kotlin("plugin.jpa") version "1.9.23"
 	id("com.google.cloud.tools.jib") version "3.3.2"
-	kotlin("jvm") version "1.9.21"
-	kotlin("plugin.spring") version "1.9.21"
 }
 
 group = "com.daelim"
@@ -34,7 +32,7 @@ dependencies {
 	runtimeOnly("com.mysql:mysql-connector-j")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-	//	swagger-ui
+	// Swagger UI
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
 }
 
@@ -64,6 +62,6 @@ jib {
 	container {
 		ports = listOf("8080")
 		jvmFlags = listOf("-Xms512m", "-Xmx1024m")
-		mainClass = "com.example.ApplicationKt"  // Application 엔트리 포인트
+		mainClass = "com.example.ApplicationKt"  // Application 진입점
 	}
 }
