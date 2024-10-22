@@ -7,6 +7,9 @@ plugins {
 	kotlin("jvm") version "1.9.23"
 	kotlin("plugin.spring") version "1.9.23"
 	kotlin("plugin.jpa") version "1.9.23"
+	id("com.google.cloud.tools.jib") version "3.3.2"
+	kotlin("jvm") version "1.9.21"
+	kotlin("plugin.spring") version "1.9.21"
 }
 
 group = "com.daelim"
@@ -48,4 +51,19 @@ tasks.withType<Test> {
 
 tasks.named<BootJar>("bootJar") {
 	archiveFileName.set("app.jar")
+}
+
+jib {
+	to {
+		image = "docker-repo.minq.work/my-app:latest"
+		auth {
+			username = System.getenv("REGISTRY_USER")
+			password = System.getenv("REGISTRY_PASSWORD")
+		}
+	}
+	container {
+		ports = listOf("8080")
+		jvmFlags = listOf("-Xms512m", "-Xmx1024m")
+		mainClass = "com.example.ApplicationKt"  // Application 엔트리 포인트
+	}
 }

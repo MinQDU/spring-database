@@ -1,0 +1,38 @@
+name: CI CD Test Server
+
+on:
+  push:
+    branches:
+      - main  # main 브랜치에 푸시될 때 트리거
+
+jobs:
+  build_and_push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+
+      - name: Build and Push Image with Jib
+        run: ./gradlew jib \
+          --image=docker-repo.minq.work/my-app:latest \
+          --jib.to.auth.username=${{ secrets.REGISTRY_USER }} \
+          --jib.to.auth.password=${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Push JSON to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        with:
+          source-directory: 'data/json'
+          destination-github-username: 'Team-Snowball'
+          destination-repository-name: 'tsb-turbo-front'
+          target-branch: main
+          target-directory: 'apps/spring-database/server/error'
+          user-email: '2024513@daelim.ac.kr'
+          user-name: 'GitHub Action Bot'
+          commit-message: 'Update internal_error_code.json'
