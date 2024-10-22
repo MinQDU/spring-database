@@ -30,6 +30,9 @@ jobs:
             -Djib.to.auth.username=${{ secrets.REGISTRY_USER }} \
             -Djib.to.auth.password=${{ secrets.REGISTRY_PASSWORD }}
 
+      - name: List current directory
+        run: ls -R  # 디렉터리 구조 확인
+
       - name: Push JSON to another repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
