@@ -24,8 +24,8 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build and Push Image with Jib
+        env:
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
         run: |
-          ./gradlew jib \
-            -Djib.to.image=docker-repo.minq.work/my-app:latest \
-            -Djib.to.auth.username=${{ secrets.REGISTRY_USER }} \
-            -Djib.to.auth.password=${{ secrets.REGISTRY_PASSWORD }}
+          ./gradlew jib
