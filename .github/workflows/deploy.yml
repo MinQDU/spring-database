@@ -24,10 +24,12 @@ jobs:
         run: chmod +x ./gradlew  # 실행 권한 부여
 
       - name: Build and Push Image with Jib
-        run: ./gradlew jib \
-          --image=docker-repo.minq.work/my-app:latest \
-          --jib.to.auth.username=${{ secrets.REGISTRY_USER }} \
-          --jib.to.auth.password=${{ secrets.REGISTRY_PASSWORD }}
+        run: |
+          ./gradlew jib \
+            -Djib.to.image=docker-repo.minq.work/my-app:latest \
+            -Djib.to.auth.username=${{ secrets.REGISTRY_USER }} \
+            -Djib.to.auth.password=${{ secrets.REGISTRY_PASSWORD }} \
+            --stacktrace --info --no-daemon
 
       - name: Push JSON to another repository
         uses: cpina/github-action-push-to-another-repository@main
