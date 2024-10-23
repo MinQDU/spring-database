@@ -19,7 +19,7 @@ class UserController(private val userService: UserService) {
     }
 
 
-    @GetMapping("/login")
+    @GetMapping("/logind")
     fun login(
         @RequestParam username: String,
         @RequestParam password: String
