@@ -21,6 +21,7 @@ class UserController(private val userService: UserService) {
 
     @GetMapping("/logind")
     fun login(
+        private val test,
         @RequestParam username: String,
         @RequestParam password: String
     ): ResponseEntity<String> {
