@@ -38,9 +38,9 @@ jobs:
           eval $(ssh-agent -s)
           ssh-add ~/.ssh/id_rsa
           ssh-keyscan -p 9981 -H minq.work >> ~/.ssh/known_hosts
-          scp -o StrictHostKeyChecking=no -P 9981 docker-compose.yml daelim@minq.work:/path/to/destination
+          scp -o StrictHostKeyChecking=no -P 9981 docker-compose.yml daelim@minq.work
           ssh -o StrictHostKeyChecking=no -p 9981 daelim@minq.work \
-          "docker stack deploy -c /path/to/destination/docker-compose.yml my-app"
+          "docker stack deploy -c docker-compose.yml my-app"
         env:
           JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.12-7/x64
           JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.12-7/x64
