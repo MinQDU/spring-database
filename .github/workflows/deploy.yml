@@ -35,6 +35,7 @@ jobs:
         run: |
           ./gradlew jib -Pjib.to.image=docker-repo.minq.work/my-app:${IMAGE_TAG}
 
+
       - name: Setup SSH and Deploy
         run: |
           mkdir -p ~/.ssh
