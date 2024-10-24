@@ -30,7 +30,7 @@ class UserController(private val userService: UserService) {
             ResponseEntity.notFound().build()
         }
     }
-    @GetMapping("/check")
+    @GetMapping("/chicken")
     fun check(
         @RequestParam username: String,
         @RequestParam sessionId: String
