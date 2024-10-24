@@ -60,6 +60,6 @@ jib {
 	container {
 		ports = listOf("8080")
 		jvmFlags = listOf("-Xms512m", "-Xmx1024m")
-		mainClass = "com.example.ApplicationKt"  // Application 진입점
+		mainClass = "com.daelim.database"  // Application 진입점
 	}
 }
