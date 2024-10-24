@@ -51,7 +51,7 @@ tasks.named<BootJar>("bootJar") {
 
 jib {
 	to {
-		image = "docker-repo.minq.work/my-app:${project.findProperty("jib.to.image") ?: "latest"}"
+		image = (project.findProperty("jib.to.image") ?: "docker-repo.minq.work/my-app:latest").toString()
 		auth {
 			username = System.getenv("REGISTRY_USER")
 			password = System.getenv("REGISTRY_PASSWORD")

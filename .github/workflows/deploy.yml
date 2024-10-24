@@ -25,7 +25,8 @@ jobs:
 
       - name: Set Image Tag
         id: vars
-        run: echo "::set-output name=tag::$(git rev-parse --short HEAD)"
+        run: echo "::set-output name=tag::docker-repo.minq.work/my-app:$(git rev-parse --short HEAD)"
+
 
       - name: Build and Push Image with Jib
         env:
@@ -33,7 +34,8 @@ jobs:
           REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
           IMAGE_TAG: ${{ steps.vars.outputs.tag }}
         run: |
-          ./gradlew jib -Pjib.to.image=docker-repo.minq.work/my-app:${IMAGE_TAG}
+          ./gradlew jib -Pjib.to.image=${IMAGE_TAG}
+
 
 
       - name: Setup SSH and Deploy
